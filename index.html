@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Alldrin Tuscano — Software Engineer</title>
+		<link rel="icon" href="images/avatar.jpg" sizes="32x32" />
+		<link rel="apple-touch-icon" href="images/avatar.jpg" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+		<meta name="description" content="Alldrin Tuscano — Computer Science graduate. Full-stack development, AI/ML integration, Web3, and game programming.">
+		<style>
+			:root{
+				--max-width:900px;
+				--accent:#fdb515;
+				--bg:#fff;
+				--text:#111;
+				--text-secondary:#333;
+				--text-muted:#555;
+				--card-bg:#fafafa;
+				--card-border:#eee;
+				--skill-bg:#f3f3f3;
+			}
+			[data-theme="dark"] {
+				--bg:#0f0f0f;
+				--text:#e8e8e8;
+				--text-secondary:#d0d0d0;
+				--text-muted:#a0a0a0;
+				--card-bg:#1a1a1a;
+				--card-border:#2a2a2a;
+				--skill-bg:#262626;
+			}
+			*{margin:0;padding:0;box-sizing:border-box}
+			body{
+				font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+				line-height:1.5;
+				color:var(--text);
+				background:var(--bg);
+				transition:background 0.3s ease, color 0.3s ease;
+			}
+			/* Scroll Progress Bar */
+			.scroll-progress {
+				position:fixed;
+				top:0;
+				left:0;
+				width:0;
+				height:4px;
+				background:var(--accent);
+				z-index:1000;
+				transition:width 0.1s ease;
+			}
+			/* Theme Toggle */
+			.theme-toggle {
+				position:fixed;
+				top:20px;
+				right:20px;
+				background:var(--card-bg);
+				border:2px solid var(--card-border);
+				border-radius:50%;
+				width:50px;
+				height:50px;
+				cursor:pointer;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				font-size:20px;
+				transition:all 0.3s ease;
+				z-index:999;
+			}
+			.theme-toggle:hover {
+				transform:scale(1.1);
+				border-color:var(--accent);
+			}
+			.wrap{max-width:var(--max-width);margin:0 auto;padding:40px}
+			header{display:flex;gap:18px;align-items:center;opacity:0;animation:fadeInUp 0.8s ease forwards}
+			@keyframes fadeInUp {
+				to {opacity:1;transform:translateY(0)}
+				from {opacity:0;transform:translateY(20px)}
+			}
+			img.avatar{
+				width:84px;
+				height:84px;
+				border-radius:8px;
+				object-fit:cover;
+				transition:transform 0.3s ease;
+			}
+			img.avatar:hover {
+				transform:scale(1.05) rotate(2deg);
+			}
+			h1{margin:0;font-size:38px;letter-spacing:0.2px}
+			.name .first{color:var(--text)}
+			.name .last{color:var(--accent)}
+			.resume-row{margin-top:8px}
+			.resume-link{
+				display:inline-flex;
+				align-items:center;
+				gap:8px;
+				color:var(--accent);
+				text-decoration:none;
+				font-weight:700;
+				font-size:14px;
+				transition:transform 0.2s ease;
+			}
+			.resume-link:hover {
+				transform:translateX(5px);
+			}
+			.resume-link .fa-file-pdf{font-size:16px}
+			h2{margin:.4rem 0 0;font-size:18px;color:var(--text-secondary)}
+			.muted{color:var(--text-muted);font-size:14px}
+			.subtitle{
+				font-size:16px;
+				font-weight:600;
+				color:var(--text-secondary);
+				margin-top:6px;
+				min-height:24px;
+			}
+			.location{font-size:15px;color:var(--text-muted)}
+			.contacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:13px}
+			.contact-link{
+				display:inline-flex;
+				align-items:center;
+				gap:8px;
+				color:var(--text-secondary);
+				text-decoration:none;
+				transition:all 0.2s ease;
+			}
+			.contact-link:hover {
+				transform:translateY(-2px);
+				color:var(--accent);
+			}
+			.contact-link:hover .fa, 
+			.contact-link:hover .fab {
+				transform:scale(1.2);
+			}
+			.contact-link .fa, .contact-link .fab{
+				color:var(--accent);
+				font-size:15px;
+				transition:transform 0.2s ease;
+			}
+			.contact-link span{font-size:13px}
+			section{
+				margin-top:28px;
+				opacity:0;
+				transform:translateY(30px);
+				transition:opacity 0.6s ease, transform 0.6s ease;
+			}
+			section.visible {
+				opacity:1;
+				transform:translateY(0);
+			}
+			.section-title h2{font-size:20px;margin:0}
+			.grid{display:grid;grid-template-columns:1fr;gap:18px}
+			.card{
+				padding:14px;
+				border-radius:8px;
+				border:1px solid var(--card-border);
+				background:var(--card-bg);
+				transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+			}
+			.card:hover {
+				transform:translateY(-4px);
+				box-shadow:0 8px 20px rgba(253,181,21,0.15);
+				border-color:var(--accent);
+			}
+			ul.compact{padding-left:1rem;margin:0}
+			.company{font-weight:700;color:var(--text)}
+			.role{font-weight:600;color:var(--text)}
+			.meta{font-size:13px;color:var(--text-muted)}
+			.card p{font-size:13px;margin:0 0 8px 0;line-height:1.45;color:var(--text-secondary)}
+			.card ul.compact li{font-size:13px;line-height:1.45;color:var(--text-secondary);margin-bottom:6px}
+			.muted.core{font-size:16px;color:var(--text);font-weight:700;margin-bottom:6px}
+			.muted.core + p{font-size:15px;line-height:1.6;color:var(--text-secondary);margin-top:4px}
+			.skills{display:flex;flex-wrap:wrap;gap:8px}
+			.skill{
+				background:var(--skill-bg);
+				padding:6px 8px;
+				border-radius:6px;
+				font-size:13px;
+				transition:transform 0.2s ease, background 0.2s ease;
+			}
+			.skill:hover {
+				transform:translateY(-2px);
+				background:var(--accent);
+				color:#000;
+			}
+			.card strong{font-size:13px;color:var(--accent);font-weight:600}
+			a.primary{color:var(--accent);text-decoration:none;font-weight:700}
+			.accent{color:var(--accent)}
+			.section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+			.section-title h2{flex-shrink:0}
+			.section-line{
+				flex-grow:1;
+				height:1px;
+				background:linear-gradient(to right, var(--accent), transparent);
+				transform-origin:left;
+				transform:scaleX(0);
+				transition:transform 0.8s ease;
+			}
+			.section-line.animate {
+				transform:scaleX(1);
+			}
+			.dot{display:none}
+			.dot{width:10px;height:10px;background:var(--accent);border-radius:50%}
+			footer{margin-top:28px;color:var(--text-muted);font-size:13px}
+			@media (min-width:900px){.wrap{padding-left:60px;padding-right:60px}}
+		</style>
+	</head>
+	<body>
+		<div class="scroll-progress"></div>
+		<button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+		
+		<div class="wrap">
+			<header>
+				<img class="avatar" src="images/avatar.jpg" alt="Alldrin Tuscano">
+				<div>
+					<h1 class="name"><span class="first">Alldrin</span> <span class="last">Tuscano</span></h1>
+					<div class="subtitle" id="typing-text"></div>
+					<div class="location">Bachelor of Engineering in Computer Science • St. Francis Institute of Technology</div>
+					<div class="resume-row">
+						<a class="resume-link" href="assets/Alldrin_Tuscano_Resume.pdf" download><i class="fas fa-file-pdf" aria-hidden="true"></i><span>Download Resume</span></a>
+					</div>
+				</div>
+			</header>
+			
+			<section>
+				<div class="contacts" aria-label="contacts">
+					<a class="contact-link" href="mailto:alldrin0512@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i><span>alldrin0512@gmail.com</span></a>
+					<a class="contact-link" href="tel:+917276501297"><i class="fa fa-phone" aria-hidden="true"></i><span>+91 7276501297</span></a>
+					<a class="contact-link" href="https://www.linkedin.com/in/alldrintuscano/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
+				</div>
+			</section>
+
+			<section>
+				<p style="margin-bottom: 12px; line-height: 1.6;">
+					Full-stack developer with strong foundations in Python, Java, and modern web stacks. I work across RESTful APIs, AI/ML integrations (Hugging Face, Google Gemini), game programming with Pygame, and Web3 marketplaces—shipping products end to end from databases and backends to responsive frontends.
+				</p>
+			</section>
+
+			<section>
+				<div class="section-title">
+					<div class="dot"></div>
+					<h2 class="accent">Technical Skills</h2>
+					<div class="section-line"></div>
+				</div>
+				<div class="card">
+					<div class="muted core">Summary</div>
+					<p>RESTful API design, full-stack development, AI/ML integration, and game programming.</p>
+
+					<div style="margin-top:12px">
+						<strong>Languages:</strong>
+						<div class="skills" style="margin-top:8px">
+							<span class="skill">Python</span><span class="skill">Java</span><span class="skill">SQL</span><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">React</span><span class="skill">Node.js</span><span class="skill">Express</span>
+						</div>
+					</div>
+
+					<div style="margin-top:12px">
+						<strong>Frameworks &amp; APIs:</strong>
+						<div class="skills" style="margin-top:8px">
+							<span class="skill">Flask</span><span class="skill">Django</span><span class="skill">FastAPI</span><span class="skill">Hugging Face</span><span class="skill">Google Gemini API</span>
+						</div>
+					</div>
+
+					<div style="margin-top:12px">
+						<strong>Libraries &amp; Tools:</strong>
+						<div class="skills" style="margin-top:8px">
+							<span class="skill">Pygame</span><span class="skill">OpenCV</span><span class="skill">Tkinter</span><span class="skill">PIL</span><span class="skill">tkcalendar</span><span class="skill">MediaPipe</span><span class="skill">NumPy</span><span class="skill">pynput</span>
+						</div>
+					</div>
+
+					<div style="margin-top:12px">
+						<strong>Databases:</strong>
+						<div class="skills" style="margin-top:8px">
+							<span class="skill">Supabase</span><span class="skill">SQLite</span><span class="skill">MongoDB</span>
+						</div>
+					</div>
+
+					<div style="margin-top:12px">
+						<strong>Platforms &amp; Technologies:</strong>
+						<div class="skills" style="margin-top:8px">
+							<span class="skill">Web3</span><span class="skill">Solidity</span><span class="skill">Truffle</span><span class="skill">On-chain integrations</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="section-title">
+					<div class="dot"></div>
+					<h2 class="accent">Education</h2>
+					<div class="section-line"></div>
+				</div>
+				<div class="grid">
+					<div class="card">
+						<div class="company">St. Francis Institute of Technology</div>
+						<div class="meta">Bachelor of Engineering in Computer Science</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="section-title">
+					<div class="dot"></div>
+					<h2 class="accent">Key Projects</h2>
+					<div class="section-line"></div>
+				</div>
+				<div class="grid">
+
+					<div class="card">
+						<div class="role">Casify – E-commerce Platform</div>
+						<div class="meta">August 2023 – ongoing</div>
+						<div class="muted">Flask, Supabase, PIL, Hugging Face, Google Gemini, JavaScript</div>
+						<ul class="compact" style="margin-top:10px">
+							<li>Built a full-stack platform enabling users to design phone cases using AI-generated art.</li>
+							<li>Integrated Google Gemini for AI-driven customer support chat and Hugging Face's Stable Diffusion XL model for case image generation.</li>
+							<li>Managed user sessions, cart, and orders with Supabase and Flask-based REST APIs.</li>
+							<li>Designed responsive frontend with real-time interactivity, order tracking, and admin tools.</li>
+						</ul>
+					</div>
+
+					<div class="card">
+						<div class="role">Touchless Typing &amp; Digital Whiteboard</div>
+						<div class="muted">Flask, Flask-SQLAlchemy, OpenCV, MediaPipe, NumPy, pynput</div>
+						<ul class="compact" style="margin-top:10px">
+							<li>Built a touchless typing application with a web-based dashboard where authenticated users can launch a virtual hand-tracked keyboard and a digital whiteboard.</li>
+							<li>The keyboard uses OpenCV + MediaPipe to track hands (pinch-to-click for interaction) and runs gesture commands (e.g., save/load/copy/paste/backspace) while pynput sends the resulting key presses into the active input field.</li>
+							<li>The Flask backend manages user sessions, registration/login, and profile updates/password changes, storing user data in SQLite via SQLAlchemy, while also serving saved whiteboard images and providing REST-style API endpoints.</li>
+							<li>The UI is rendered with HTML templates and enhanced with CSS/JavaScript for a responsive dashboard, and the web app launches the CV-based modules using subprocess so the webcam features run on demand.</li>
+						</ul>
+					</div>
+
+					<div class="card">
+						<div class="role">ExoStrike Space Shooter Game</div>
+						<div class="muted">Pygame, Python, SQLite, OpenCV</div>
+						<ul class="compact" style="margin-top:10px">
+							<li>Developed a 2D space shooter game featuring advanced enemy AI, multiple ship options, power-ups, and real-time audiovisual effects.</li>
+							<li>Used Pygame and Python to build the game mechanics, SQLite for persistent high score storage, and OpenCV for dynamic video backgrounds.</li>
+							<li>Implemented particle effects, screen shake, fullscreen toggle, and responsive audio-visual feedback.</li>
+						</ul>
+					</div>
+
+					<div class="card">
+						<div class="role">WorkOra Marketplace Platform</div>
+						<div class="muted">React, Node.js/Express, MongoDB, Solidity/Web3, Material UI</div>
+						<ul class="compact" style="margin-top:10px">
+							<li>Built a full-stack Web3 freelancing marketplace pairing a React + Material UI SPA with an Express/MongoDB API, managing authentication, profile data, campaigns, and real-time dashboards.</li>
+							<li>Engineered backend services with JWT auth, Google OAuth, Cloudinary asset uploads, and Mongo models to power startup briefs, freelancer portfolios, and performance leaderboards.</li>
+							<li>Integrated Truffle-based Solidity contracts for on-chain campaign funding and incentive payouts, syncing ABI updates to the frontend for seamless blockchain interactions.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<footer>
+			</footer>
+		</div>
+
+		<script>
+			// Typing Effect - Universal function for any element
+			function typeText(element, text, speed = 60, delay = 0) {
+				setTimeout(() => {
+					let i = 0;
+					element.textContent = '';
+					function type() {
+						if (i < text.length) {
+							element.textContent += text.charAt(i);
+							i++;
+							setTimeout(type, speed);
+						}
+					}
+					type();
+				}, delay);
+			}
+
+			// Type header elements only
+			const typingElement = document.getElementById('typing-text');
+			
+			typeText(typingElement, "Full-Stack Development • AI/ML • Web3 • Game Programming", 60, 500);
+
+			// Typing animation for section headers when they come into view
+			const sectionObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && !entry.target.dataset.typed) {
+						const h2 = entry.target.querySelector('.section-title h2');
+						const line = entry.target.querySelector('.section-line');
+						
+						if (h2) {
+							const originalText = h2.textContent;
+							typeText(h2, originalText, 50, 100);
+							entry.target.dataset.typed = 'true';
+							if (line) {
+								setTimeout(() => {
+									line.classList.add('animate');
+								}, 100 + (originalText.length * 50));
+							}
+						}
+					}
+				});
+			}, { threshold: 0.3 });
+
+			// Observe all sections with section-title
+			document.querySelectorAll('section').forEach(section => {
+				if (section.querySelector('.section-title')) {
+					sectionObserver.observe(section);
+				}
+			});
+
+			// Scroll Progress Bar
+			window.addEventListener('scroll', () => {
+				const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+				const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+				const scrolled = (winScroll / height) * 100;
+				document.querySelector('.scroll-progress').style.width = scrolled + '%';
+			});
+
+			// Dark/Light Theme Toggle
+			const themeToggle = document.querySelector('.theme-toggle');
+			const html = document.documentElement;
+			//const savedTheme = localStorage.getItem('theme') || 'light';
+			const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			
+			html.setAttribute('data-theme', savedTheme);
+			themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+			
+			themeToggle.addEventListener('click', () => {
+				const currentTheme = html.getAttribute('data-theme');
+				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+				html.setAttribute('data-theme', newTheme);
+				localStorage.setItem('theme', newTheme);
+				themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+			});
+
+			// Parallax Scrolling Effect for sections
+			window.addEventListener('scroll', () => {
+				const scrolled = window.pageYOffset;
+				const sections = document.querySelectorAll('section');
+				
+				sections.forEach((section, index) => {
+					const speed = 0.3 + (index * 0.05);
+					const yPos = -(scrolled * speed * 0.1);
+					section.style.transform = `translateY(${yPos}px)`;
+				});
+			});
+
+			// Intersection Observer for fade-in animations
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+					}
+				});
+			}, { threshold: 0.1 });
+
+			document.querySelectorAll('section').forEach(section => {
+				observer.observe(section);
+			});
+		</script>
+	</body>
+</html>
